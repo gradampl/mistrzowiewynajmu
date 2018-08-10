@@ -26,7 +26,7 @@ namespace MistrzowieWynajmu
         {
             services.AddMvc();
 
-            var dbConnectionString = @"Server=(localdb)\mssqllocaldb;Database=MistrzowieDb;Trusted_Connection=True";
+            var dbConnectionString = @"Server=(localdb)\mssqllocaldb;Database=MistrzowieDb;Trusted_Connection=True;";
 
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbConnectionString));
         }
