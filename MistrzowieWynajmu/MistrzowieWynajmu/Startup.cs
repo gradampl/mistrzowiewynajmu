@@ -30,9 +30,13 @@ namespace MistrzowieWynajmu
 
             var dbConnectionString = @"Server=(localdb)\mssqllocaldb;Database=MistrzowieDb;Trusted_Connection=True;";
 
+            //services.AddDbContext<DatabaseContext>(options =>
+            //options.UseSqlite("Data Source=localdatabase.db"));
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbConnectionString));
 
             services.AddScoped<IPropertyRepository, PropertyRepository>();
+            services.AddScoped<IOwnerRepository, OwnerRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
