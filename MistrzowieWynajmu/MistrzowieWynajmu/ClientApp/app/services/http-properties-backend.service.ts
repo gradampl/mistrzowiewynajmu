@@ -22,7 +22,7 @@ export class HttpPropertiesBackendService extends PropertiesBackendService {
         });
         this.jsonContentOptions = new RequestOptions({
             headers: headersJson
-        })
+        });
     }
 
     addProperty(newProperty: Property): Observable<number> {
