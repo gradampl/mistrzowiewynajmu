@@ -1,0 +1,33 @@
+﻿<div>
+	<div>
+		<h3>{{pageTitle}}</h3>
+	</div>
+
+	<p-growl [sticky]="false" [life]="5000" [(value)]="messages"></p-growl>
+
+	<div style="margin-top:15px; margin-right: 25px" class="content-table">
+		<table class="table client table-responsive">
+			<thead>
+				<tr>
+					<th class="col-md-2 col-sm-2 col-xs-2">Lp.</th>
+					<th class="col-md-4 col-sm-4 col-xs-4">Ulica</th>
+					<th class="col-md-4 col-sm-4 col-xs-4">Miasto</th>
+					<th class="col-md-1 col-sm-1 col-xs-1"></th>
+					<th class="col-md-1 col-sm-1 col-xs-1"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let address of addresses let i = index" [attr.data-index]="i">
+					<td class="col-md-2 col-sm-2 col-xs-2">{{i+1}}</td>
+					<td class="col-md-4 col-sm-4 col-xs-4">{{address.street}}</td>
+					<td class="col-md-4 col-sm-4 col-xs-4">{{address.city}}</td>
+					<td class="col-md-1 col-sm-1 col-xs-1"><button class="btn btn-primary" (click)="getAddress(address.addressId)">Szczegóły</button></td>
+					<td class="col-md-1 col-sm-1 col-xs-1"><button class="btn btn-success" (click)="updateAddress(address.addressId)">Aktualizuj</button></td>
+				</tr>
+				<tr *ngIf="addresses.length == 0">
+					<td style="text-align: center" colspan="8"><p-progressSpinner [style]="{width: '40px', height: '40px'}"></p-progressSpinner></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

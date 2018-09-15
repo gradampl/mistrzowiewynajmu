@@ -1,0 +1,36 @@
+﻿<div>
+    <div>
+        <h3>{{pageTitle}}</h3>
+    </div>
+    <p-growl [sticky]="false" [life]="5000" [(value)]="messages"></p-growl>
+    <p-confirmDialog width="450"></p-confirmDialog>
+    <div style="margin-top: 15px; margin-right: 25px" class="content-table">
+        <table class="table client table-responsive">
+            <thead>
+                <tr>
+                    <th class="col-md-1 col-sm-1 col-xs-1">Lp.</th>
+                    <th class="col-md-3 col-sm-3 col-xs-3">Imie</th>
+                    <th class="col-md-3 col-sm-3 col-xs-3">Nazwisko</th>
+                    <th class="col-md-3 col-sm-3 col-xs-3">Telefon</th>
+                    <th class="col-md-1 col-sm-1 col-xs-1"></th>
+                    <th class="col-md-1 col-sm-1 col-xs-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let owner of owners let i = index" [attr.data-index]="i">
+                    <td class="col-md-1 col-sm-1 col-xs-1">{{i+1}}</td>
+                    <td class="col-md-3 col-sm-3 col-xs-3">{{owner.name}}</td>
+                    <td class="col-md-3 col-sm-3 col-xs-3">{{owner.surname}}</td>
+                    <td class="col-md-3 col-sm-2 col-xs-3">{{owner.phone}}</td>
+                    <td class="col-md-1 col-sm-1 col-xs-1"><button class="btn btn-primary" (click)="getOwner(owner.ownerId)">Szczegoly</button></td>
+                    <td class="col-md-1 col-sm-1 col-xs-1"><button class="btn btn-success" (click)="updateOwner(owner.ownerId)">Aktualizuj</button></td>
+                    
+                </tr>
+                <tr *ngIf="owners.length == 0">
+                    <td style="text-align: center" colspan="8"><p-progressSpinner [style]="{width: '40px', height: '40px'}"></p-progressSpinner></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿<div>
+	<div style="margin-top:25px">
+		<div>
+			<a (click)="goBack()" class="btn btn-warning">Wstecz</a>
+			<a (click)="activateNewAddressMode()" class="btn btn-info">{{addressBtnTitle}}</a>
+			<a (click)="activateNewOwnerMode()" class="btn btn-success">{{ownerBtnTitle}}</a>
+		</div>
+		
+		<div *ngIf="isNewOwnerModeActivated">
+			<new-owner [receivedId]="property.ownerId" (ownerAddedEvent)="ownerAddedEvent($event)"></new-owner>
+		</div>
+		<div *ngIf="isNewAddressModeActivated">
+			<new-address [receivedId]="property.addressId" (addressAddedEvent)="addressAddedEvent($event)"></new-address>
+		</div>
+		
+		<div>
+			<h3>{{pageTitle}}</h3>
+		</div>
+		<p-growl [sticky]="false" [life]="5000" [(value)]="messages"></p-growl>
+
+		<div style="margin-top:25px; margin-bottom: 50px">
+			<form #propertyForm="ngForm" (ngSubmit)="onSubmit(property)">
+				<div class="form-group">
+					<label for="type">Typ nieruchomości:</label>
+					<select [disabled]="!isInEditMode" required class="form-control" id="type" [(ngModel)]="property.type" name="type" #type="ngModel">
+						<option></option>
+						<option value="0">Dom</option>
+						<option value="1">Mieszkanie</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Ilość pokoji:</label>
+					<input [disabled]="!isInEditMode" required id="rooms" name="rooms" type="number" [(ngModel)]="property.rooms" class="form-control" placeholder="Ilość pokoji...">
+				</div>
+				<div class="form-group">
+					<label>Powierzchnia nieruchomości:</label>
+					<input [disabled]="!isInEditMode" required id="area" name="area" type="number" [(ngModel)]="property.area" class="form-control" placeholder="Powierzchnię nieruchomości...">
+				</div>
+				<div class="form-group">
+					<label>Zmywarka:</label>
+					<select [disabled]="!isInEditMode" required id="washer" name="washer" [(ngModel)]="property.washer" class="form-control">
+						<option></option>
+						<option value="true">Tak</option>
+						<option value="false">Nie</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Lodówka:</label>
+					<select [disabled]="!isInEditMode" required id="refrigerator" [(ngModel)]="property.refrigerator" name="refrigerator" class="form-control">
+						<option></option>
+						<option value="true">Tak</option>
+						<option value="false">Nie</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Żelazko:</label>
+					<select [disabled]="!isInEditMode" required id="iron" name="iron" [(ngModel)]="property.iron" class="form-control">
+						<option></option>
+						<option value="true">Tak</option>
+						<option value="false">Nie</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Opis:</label>
+					<textarea [disabled]="!isInEditMode" required id="description" name="description" [(ngModel)]="property.description" class="form-control"></textarea>
+				</div>
+				<div *ngIf="isInEditMode">
+					<button type="submit" [disabled]="!propertyForm.form.valid" class="btn btn-primary">Zapisz</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

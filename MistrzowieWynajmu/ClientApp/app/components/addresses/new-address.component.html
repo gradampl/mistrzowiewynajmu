@@ -1,0 +1,26 @@
+﻿<div>
+    <div style="margin-top: 25px">
+        <div *ngIf="isInAddressDetailsMode">
+            <a (click)="goBack()" class="btn btn-warning">Wstecz</a>
+        </div>
+        <div>
+            <h3>{{pageTitle}}</h3>
+        </div>
+        <p-growl [sticky]="false" [life]="5000" [(value)]="messages"></p-growl>
+        <div style="margin-top: 25px; margin-bottom: 50px">
+            <form #addressForm="ngForm" (ngSubmit)="onSubmit(address)">
+                <div class="form-group">
+                    <label>Ulica:</label>
+                    <input [disabled]="!isInEditMode" required id="street" name="street" type="text" [(ngModel)]="address.street" class="form-control" placeholder="Ulica">
+                </div>
+                <div class="form-group">
+                    <label>Miejscowosc:</label>
+                    <input [disabled]="!isInEditMode" required id="city" name="city" type="text" [(ngModel)]="address.city" class="form-control" placeholder="Miejscowosc">
+                </div>
+                <div *ngIf="isInEditMode">
+                    <button type="submit" [disabled]="!addressForm.form.valid" class="btn btn-primary">Zapisz</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
